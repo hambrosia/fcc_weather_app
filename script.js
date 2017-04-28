@@ -25,7 +25,7 @@ function weatherAdvice(){
 
   $(function(){
     $("#jumbo-high").html("The high today is " + high + "&#176;C.");
-    $("#jumbo-low").html(low  +"&#176;C is the low today." );
+    $("#jumbo-low").html("The low today is " + low + "&#176;C." );
 
 
     $("#jumbo-high").hover(function(){
