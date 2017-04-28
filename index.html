@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Weather by Hambrotech</title>
+  <title>Friendly Weather</title>
 
   <!-- Bootstrap Default CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -28,17 +28,29 @@
 <body>
   <div id="wrapper">
     <div id="container">
+      <div class="page-header">
+  <h1 id="company-name">&#9788; Friendly Weather &#9788;</h1>
+</div>
       <!-- JUMBOTRON WITH WEATHER IMAGE -->
       <div class="jumbotron">
 
-        <!-- HEADING IN JUMBOTRON WITH WHAT TO WEAR -->
-        <h1><span id="wear-this">Wear <em>this</em> today!</span></h1>
+        <!-- HEADING IN JUMBOTRON WITH TEMP RANGE -->
+        <h1><span id="jumbo-high">Enable location to get weather.</span></h1>
+        <h1><span id="jumbo-low"></span></h1>
+        <h1><span id="jumbo-description"></span></h1>
+
+      </div>
+      <!-- HORIZONTAL RULE -->
+      <div class="hidden" id="hr-1">
+        <hr>
       </div>
 
-      <!-- LEFT WEATHER INFO PANE -->
+      <!-- WEATHER ROW -->
       <div class="row" id="weather-info">
+        <!-- LEFT WEATHER INFO PANE -->
+
         <div class="col-xs-4" id="weather-1">
-          <h2>Location</h2>
+          <span id="location"></span>
           <ul>
           <span id="city"></span>
           </ul>
@@ -46,7 +58,7 @@
 
         <!-- MIDDLE WEATHER INFO PANE -->
         <div class="col-xs-4" id="weather-2">
-          <h2>Today's Forecast</h2>
+          <span id="forecast"></span>
           <ul>
           <span id="current-weather"></span>
           </ul>
@@ -54,7 +66,7 @@
 
         <!-- RIGHT WEATHER INFO PANE -->
         <div class="col-xs-4" id="weather-3">
-          <h2>Sun and Wind</h2>
+          <span id="astro"></span>
           <ul>
             <span id="sun-wind"></span>
           </ul>
@@ -65,14 +77,17 @@
 
 
       <!-- HORIZONTAL RULE -->
-      <hr>
+      <div class="hidden" id="hr-2">
+        <hr>
+
+      </div>
 
       <!-- FOOTER -->
       <footer>
-        <p>&copy; Hambrotech Ltd. 2017</p>
+        <p>&copy; Friendly Weather Inc. 2017</p>
       </footer>
 
-      <!-- END CONTAINER>
+      <!-- END CONTAINER -- >
     </div>
     <!-- END WRAPPER -->
   </div>

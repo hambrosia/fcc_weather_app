@@ -1,37 +1,66 @@
-body{
-  background-color: darkslategrey;
 
-}
 
 ul {
     list-style-type: none;
     margin: 0;
     padding-left: 10px;
 }
+footer{
+  padding-bottom: 10px;
+}
+.page-header{
+  font-family:"Courier New", courier, monospace;
+  text-align: center;
+}
+
+.temp-background{
+
+}
 
 
+.jumbotron{
+  background-color: darkgrey;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  padding: 20px;
+}
+
+#weather-info{
+  padding-bottom: 15px;
+}
 
 #wrapper{
   padding: 20px;
 }
 
 #container{
-  max-width: 860px;
+  max-width: 960px;
   margin: auto;
   background: white;
   border-radius: 20px;
-  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 3px;
+
+
+
 }
 
-
+#jumbo-description{
+  font-size: 20px;
+}
 .jumbotron{
   text-align: center;
   border-radius: 20px;
+
 }
 
 @media screen and (min-width: 0px) and (max-width: 444px){
   h2{
     font-size: 18px;
+  }
+  h1{
+    font-size: 22px;
   }
 
   ul {
