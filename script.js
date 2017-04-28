@@ -10,6 +10,7 @@ var lowF = 0;
 var lowFshort = "";
 var highFshort = "";
 
+var iconURL = "";
 var description = "";
 
 var jumboColor = "-webkit-gradient(linear, left top, left bottom, from(#FF8C00), to(#66CDAA))"
@@ -25,7 +26,7 @@ function weatherAdvice(){
 
   $(function(){
     $("#jumbo-high").html("The high today is " + high + "&#176;C.");
-    $("#jumbo-low").html("The low today is " + low + "&#176;C." );
+    $("#jumbo-low").html(low  +"&#176;C is the low today." );
 
 
     $("#jumbo-high").hover(function(){
@@ -40,7 +41,8 @@ function weatherAdvice(){
       $(this).html("The low today is " + low + "&#176;C.");
     });
 
-    $("#jumbo-description").html("There may be " + description + "." +"<br>"
+
+    $("#jumbo-description").html("<img src =" + iconURL + ">" + "<br>"
     + "Hover over temps for Farenheit."
   );
 
@@ -123,6 +125,16 @@ var getWeather = function(){
         lowFshort = lowF.toString().substr(0,2);
         highFshort = highF.toString().substr(0,2);
 
+        var longURL = weatherData.query.results.channel.item.description;
+
+        var i =18;
+        while(longURL[i] !== ">"){
+          iconURL += longURL[i];
+          i++;
+        }
+
+        iconURL = iconURL.substring(0,iconURL.length-1);
+        console.log(iconURL);
 
         description = weatherData.query.results.channel.item.forecast[0].text.toLowerCase();
 
