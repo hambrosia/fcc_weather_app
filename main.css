@@ -1,0 +1,42 @@
+body{
+  background-color: darkslategrey;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 10px;
+}
+
+
+
+#wrapper{
+  padding: 20px;
+}
+
+#container{
+  max-width: 860px;
+  margin: auto;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+
+.jumbotron{
+  text-align: center;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 444px){
+  h2{
+    font-size: 18px;
+  }
+
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+  }
+}
