@@ -1,9 +1,9 @@
 
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding-left: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 10px;
 }
 footer{
   padding-bottom: 10px;
@@ -55,22 +55,33 @@ footer{
 
 }
 
-#units-button{
+#units-button-c{
   margin-top: 15px;
 }
+
+#units-button-f{
+  margin-top: 15px;
 }
 
+
 @media screen and (min-width: 0px) and (max-width: 575px){
+
   h2{
-    font-size: 18px;
+    font-size: 14px;
   }
   h1{
-    font-size: 22px;
+    font-size: 20px;
   }
 
   ul {
-      list-style-type: none;
-      margin: 0;
-      padding-left: 0;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+
+  #container{
+    max-width: none;
+    padding-left: 0px;
+    padding-right: 0px;
   }
+
 }
