@@ -4,6 +4,9 @@ var userLong = "";
 var high = 0;
 var low = 0;
 
+var currentTemp = 0;
+var currentF = 0;
+
 var highF = 0;
 var lowF = 0;
 
@@ -15,8 +18,8 @@ var description = "";
 
 var weatherData;
 
-var jumboColor = "-webkit-gradient(linear, left top, left bottom, from(#FF8C00), to(#66CDAA))"
-//will need to change indexes 4 and 5 to get proper colors in
+var jumboColor = "-webkit-gradient(linear, left bottom, left top, ";
+
 
 
 function weatherDisplay(){
@@ -30,17 +33,91 @@ function weatherDisplay(){
     console.log("logging WeatherData from WeatherDisplay", weatherData);
     high = Number(weatherData.query.results.channel.item.forecast[0].high);
     low = Number(weatherData.query.results.channel.item.forecast[0].low );
+    currentTemp = Number(weatherData.query.results.channel.item.condition.temp);
+
 
     //create variables for farenheit conversions
     highF = high*(9/5)+32;
     lowF = low*(9/5)+32;
+    currentF = currentTemp*(9/5)+32;
 
     //chop off the decimals on farenheit temps
     lowFshort = lowF.toString().substr(0,2);
     highFshort = highF.toString().substr(0,2);
+    currentF = currentF.toString().substr(0,2);
+
+
+    //prep css string for background color based on temps
+//should look like this when complete
+// var jumboColor = "-webkit-gradient(linear, left top, left bottom, from(#FF8C00), to(#66CDAA))"
+
+
+//set first part of jumbotron background gradient based on low temp
+    if(low <= 0){
+      jumboColor += "from(#B0C4DE), ";
+    }
+    if(low >= 0 && low < 5){
+      jumboColor += "from(#B0E0E6), ";
+    }
+    if(low >= 5 && low < 10){
+      jumboColor += "from(#87CEFA), ";
+    }
+    if(low >=  10 && low < 15){
+      jumboColor += "from(#AFEEEE), ";
+    }
+    if(low >=  15 && low < 20){
+      jumboColor += "from(#66CDAA), ";
+    }
+    if(low >=  20 && low < 25){
+      jumboColor += "from(#8FBC8F), ";
+    }
+    if(low >=  25 && low < 30){
+      jumboColor += "from(#FF8C00), ";
+    }
+    if(low >=  30 && low < 35){
+      jumboColor += "from(#F4A460), ";
+    }
+    if(low >=  35){
+      jumboColor += "from(#DC143C), ";
+    }
+
+//change css for high color
+if(high <= 0){
+    jumboColor += "to(#B0C4DE))";
+  }
+  if(high >= 0 && high < 5){
+    jumboColor += "to(#B0E0E6))";
+  }
+  if(high >= 5 && high < 10){
+    jumboColor += "to(#87CEFA))";
+  }
+  if(high >=  10 && high < 15){
+    jumboColor += "to(#AFEEEE))";
+  }
+  if(high >=  15 && high < 20){
+    jumboColor += "to(#66CDAA))";
+  }
+  if(high >=  20 && high < 25){
+    jumboColor += "to(#8FBC8F))";
+  }
+  if(high >=  25 && high < 30){
+    jumboColor += "to(#FF8C00))";
+  }
+  if(high >=  30 && high < 35){
+    jumboColor += "to(#F4A460))";
+  }
+  if(high >=  35){
+    jumboColor += "to(#DC143C))";
+  }
+
+  //make sure the text is coming out right for the css background-color
+    console.log(jumboColor);
+
 
     //get the string that contains the icon url
     var longURL = weatherData.query.results.channel.item.description;
+
+
 
     // remove extraneous text from icon url
     var i =18;
@@ -64,7 +141,8 @@ function weatherDisplay(){
     $("#jumbo-low").html("The low today is " + low + "&#176;C." );
 
     //add an icon
-    $("#jumbo-description").html("<img src =" + iconURL + ">" + "<br>");
+    $("#jumbo-description").html("<img src =" + iconURL + ">" + "<br>" + "<h2>" + weatherData.query.results.channel.item.forecast[0].text + "</h2>" + currentTemp + "&#176;C / " + currentF + "&#176;F."
+    );
 
     //make units button appear with weather
     $("#units-button-f").removeClass("hidden");
@@ -100,7 +178,7 @@ function weatherDisplay(){
 
     //fill in info into Forecast Column
     $("#forecast").html("<h2>Tomorrow's Forecast</h2>");
-    $("#current-weather").html("<li>High: " + high + " &#176;C" + " / " + highFshort + " &#176;F</li>" +
+    $("#tomorrow-weather").html("<li>High: " + high + " &#176;C" + " / " + highFshort + " &#176;F</li>" +
     "<li>Low: " + low + " &#176;C" + " / " + lowFshort + "&#176;F</li>" +
     "<li>" + weatherData.query.results.channel.item.forecast[1].text + "</li>");
 
@@ -133,6 +211,7 @@ function savePosition(position) {
 
   //having issues with asynchronous / order of functions
   // if getWeather and weatherDisplay don't run here, they won't have the URL which is produced from the location
+  // maybe this is accidentally working as a callback?
   getWeather();
   weatherDisplay();
 }

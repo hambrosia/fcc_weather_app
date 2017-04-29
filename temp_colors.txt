@@ -1,0 +1,10 @@
+< zero - lightsteelblue  B0C4DE
+0 - powderblue B0E0E6
+5 - light sky blue 87CEFA
+10 - paleturqoise AFEEEE
+15 - mediumaquamarine 66CDAA
+20 - dark sea green 	8FBC8F
+25 - sandybrown F4A460
+30 - darkorange FF8C00
+35 - orange red FF4500
+>35 - crimson DC 14 3C
