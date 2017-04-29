@@ -121,7 +121,7 @@ if(high <= 0){
 
     // remove extraneous text from icon url
     var i =18;
-    while(longURL[i] !== ">" ){
+    while( (longURL[i] !== ">") && (i < 100) ){
       iconURL += longURL[i];
       i++;
     }
