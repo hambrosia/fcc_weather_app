@@ -1,25 +1,3 @@
-var userLat = "";
-var userLong = "";
-
-var high = 0;
-var low = 0;
-
-var currentTemp = 0;
-var currentF = 0;
-
-var highF = 0;
-var lowF = 0;
-
-var lowFshort = "";
-var highFshort = "";
-
-var iconURL = "";
-var description = "";
-
-var weatherData;
-
-var jumboColor = "-webkit-gradient(linear, left bottom, left top, ";
-
 
 
 function weatherDisplay(){
@@ -27,10 +5,26 @@ function weatherDisplay(){
 
   $(function(){
 
+    var jumboColor = "-webkit-gradient(linear, left bottom, left top, ";
+
+    var high = 0;
+    var low = 0;
+
+    var currentTemp = 0;
+    var currentF = 0;
+
+    var highF = 0;
+    var lowF = 0;
+
+    var lowFshort = "";
+    var highFshort = "";
+
+    var iconURL = "";
+    var description = "";
+
     //first get the variables setup for output
 
     // save high and low temps to variables
-    console.log("logging WeatherData from WeatherDisplay", weatherData);
     high = Number(weatherData.query.results.channel.item.forecast[0].high);
     low = Number(weatherData.query.results.channel.item.forecast[0].low );
     currentTemp = Number(weatherData.query.results.channel.item.condition.temp);
@@ -110,14 +104,8 @@ if(high <= 0){
     jumboColor += "to(#DC143C))";
   }
 
-  //make sure the text is coming out right for the css background-color
-    console.log(jumboColor);
-
-
     //get the string that contains the icon url
     var longURL = weatherData.query.results.channel.item.description;
-
-
 
     // remove extraneous text from icon url
     var i =18;
@@ -128,19 +116,14 @@ if(high <= 0){
     // some additional cleaning to remove unneeded text from url
     iconURL = iconURL.substring(0,iconURL.length-1);
 
-    // log it to check the url to make sure it looks good
-    console.log(iconURL);
 
     //start output to screen
-
-    //make units button appear
-    $("#units-button").removeClass("hidden");
 
     //update jumbotron
     $("#jumbo-high").html("The high today is " + high + "&#176;C.");
     $("#jumbo-low").html("The low today is " + low + "&#176;C." );
 
-    //add an icon
+    //add icon and current weather conditions
     $("#jumbo-description").html("<img src =" + iconURL + ">" + "<br>" + "<h2>" + weatherData.query.results.channel.item.forecast[0].text + "</h2>" + currentTemp + "&#176;C / " + currentF + "&#176;F."
     );
 
@@ -151,16 +134,19 @@ if(high <= 0){
     $("#units-button-f").click(function(){
       $("#jumbo-high").html("The high today is " + highFshort + "&#176;F.").hide().fadeIn(1500);
       $("#jumbo-low").html("The low today is " + lowFshort + "&#176;F.").hide().fadeIn(1500);
-      $(".button").toggle();
+      $("#units-button-f").toggle();
+      $("#units-button-c").toggle();
     });
+
     //toggle to celcius display
     $("#units-button-c").click(function(){
       $("#jumbo-high").html("The high today is " + high + "&#176;C.").hide().fadeIn(1500);
       $("#jumbo-low").html("The low today is " + low + "&#176;C.").hide().fadeIn(1500);
-      $(".button").toggle();
+      $("#units-button-f").toggle();
+      $("#units-button-c").toggle();
     });
 
-    //change background color to (soon) match weather
+    //change background color to match weather
     $(".jumbotron").addClass("temp-background");
     $(".temp-background").css({
       background: jumboColor
@@ -204,16 +190,18 @@ function getLocation() {
 
 function savePosition(position) {
 
-  userLat = position.coords.latitude;
-  userLong = position.coords.longitude;
+  var userLat = position.coords.latitude;
+  var userLong = position.coords.longitude;
 
   userURL = "https://simple-weather.p.mashape.com/weatherdata?lat=" + userLat + "&" + "lng="+ userLong;
+  console.log("Logged from savePosition" + userURL);
 
   //having issues with asynchronous / order of functions
   // if getWeather and weatherDisplay don't run here, they won't have the URL which is produced from the location
   // maybe this is accidentally working as a callback?
+
   getWeather();
-  weatherDisplay();
+
 }
 
 
@@ -228,7 +216,6 @@ var getWeather = function(){
         Accept: "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      async: false,
       type: "GET",
       url: userURL,
       success: function(weatherInfo){
@@ -237,6 +224,8 @@ var getWeather = function(){
         // prep data for handling as object
         weatherData = JSON.parse(weatherInfo);
         console.log("ajax got the weather", weatherData);
+
+        weatherDisplay();
 
       }
     });

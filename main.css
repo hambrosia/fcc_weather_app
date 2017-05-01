@@ -19,7 +19,7 @@ footer{
 
 
 .jumbotron{
-  background-color: darkgrey;
+  background-color: #584C4C;
   color: white;
   text-shadow: 2px 2px 2px black;
   padding: 20px;
@@ -77,7 +77,7 @@ footer{
     list-style-type: none;
     margin: 0;
     padding-left: 0;
-
+}
   #container{
     max-width: none;
     padding-left: 0px;
